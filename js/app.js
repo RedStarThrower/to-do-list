@@ -67,7 +67,7 @@ function app() {
 
     	_genButtons: function() {
     		var buttons = ["all", "haven't started", "in progress", "complete"].map(function(goalType){
-    			return <button onClick={this._filterView} value={goalType}>{goalType}</button>
+    			return <button className="gen-button" onClick={this._filterView} value={goalType}>{goalType}</button>
     		}.bind(this))
     		return buttons
     	},
@@ -107,10 +107,14 @@ function app() {
     		if (this.state.viewType === "in progress") goalColl = goalColl.where({status: "in progress"})
     		if (this.state.viewType === "complete") goalColl = goalColl.where({status: "complete"})    	
     		return (
-    			<div className="goalView">
-    				<div className="buttons">{this._genButtons()}</div>
-    				<GoalAdder adderFunc={this._addGoal} />
-    				<GoalList updater={this._updater} goalColl={goalColl} remover={this._removeGoal}/>
+    				<div className="goalView">
+	    				{/*<div className="header">
+	    				<p className="title">Goal-Builder</p>
+	    				</div>*/}
+
+	    				<div className="buttons">{this._genButtons()}</div>
+	    				<GoalAdder adderFunc={this._addGoal} />
+	    				<GoalList updater={this._updater} goalColl={goalColl} remover={this._removeGoal}/>
     			</div>
     		)
     	}
@@ -122,7 +126,7 @@ function app() {
     		if (keyEvent.keyCode === 13) {
     			var goalEntry = keyEvent.target.value
     			keyEvent.target.value = ""
-    			console.log(goalEntry)
+    			//console.log(goalEntry)
     			this.props.adderFunc(goalEntry)
     		}
 
@@ -177,7 +181,7 @@ function app() {
     					<option value="in progress">in progress</option>
     					<option value="complete">complete</option>
     				</select>
-    				<button onClick={this._removeWithClick}>X</button>
+    				<button className="x-button" onClick={this._removeWithClick}>X</button>
     			   </div>
     	}
     })
